@@ -11,10 +11,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Bishop extends Piece{
-    private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = { -9, -7, 7, 9 };
-
-    public Bishop(final Alliance pieceAlliance, final int piecePosition) {
+public class Queen extends Piece{
+    private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = { -9, -8, -7, -1, 1, 7, 8, 9 };
+    public Queen(final Alliance pieceAlliance, final int piecePosition) {
         super(piecePosition, pieceAlliance);
     }
 
@@ -48,9 +47,9 @@ public class Bishop extends Piece{
         return ImmutableList.copyOf(legalMoves);
     }
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset){
-        return BoardUtils.FIRST_COLUMN[currentPosition] && (candidateOffset == -9 || candidateOffset == 7);
+        return BoardUtils.FIRST_COLUMN[currentPosition] && (candidateOffset == -1 || candidateOffset == -9 || candidateOffset == 7);
     }
     private static boolean isEightColumnExclusion(final int currentPosition, final int candidateOffset){
-        return BoardUtils.FIRST_COLUMN[currentPosition] && (candidateOffset == -7 || candidateOffset == 9);
+        return BoardUtils.FIRST_COLUMN[currentPosition] && (candidateOffset == -7 || candidateOffset == 1 || candidateOffset == 9);
     }
 }
