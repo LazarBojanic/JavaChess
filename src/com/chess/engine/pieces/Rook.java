@@ -52,4 +52,8 @@ public class Rook extends Piece{
     private static boolean isEightColumnExclusion(final int currentPosition, final int candidateOffset){
         return BoardUtils.FIRST_COLUMN[currentPosition] && (candidateOffset == 1);
     }
+    @Override
+    public Rook movePiece(final Move move) {
+        return new Rook(move.getMovedPiece().getPieceAlliance(), move.getDestinationCoordinate());
+    }
 }
