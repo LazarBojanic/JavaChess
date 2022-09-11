@@ -59,10 +59,17 @@ public abstract class Piece {
     }
     public abstract Collection<Move> calculateLegalMoves(final Board board);
     public abstract Piece movePiece(Move move);
+
+
     public enum PieceType{
         PAWN("P"){
             @Override
             public boolean isKing(){
+                return false;
+            }
+
+            @Override
+            public boolean isRook() {
                 return false;
             }
         },
@@ -71,10 +78,20 @@ public abstract class Piece {
             public boolean isKing(){
                 return false;
             }
+
+            @Override
+            public boolean isRook() {
+                return false;
+            }
         },
         BISHOP("B"){
             @Override
             public boolean isKing(){
+                return false;
+            }
+
+            @Override
+            public boolean isRook() {
                 return false;
             }
         },
@@ -83,10 +100,20 @@ public abstract class Piece {
             public boolean isKing(){
                 return false;
             }
+
+            @Override
+            public boolean isRook() {
+                return true;
+            }
         },
         QUEEN("Q"){
             @Override
             public boolean isKing(){
+                return false;
+            }
+
+            @Override
+            public boolean isRook() {
                 return false;
             }
         },
@@ -94,6 +121,11 @@ public abstract class Piece {
             @Override
             public boolean isKing(){
                 return true;
+            }
+
+            @Override
+            public boolean isRook() {
+                return false;
             }
         };
         private String pieceName;
@@ -105,6 +137,6 @@ public abstract class Piece {
             return this.pieceName;
         }
         public abstract boolean isKing();
-
+        public abstract boolean isRook();
     }
 }
