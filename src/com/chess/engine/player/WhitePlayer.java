@@ -5,6 +5,8 @@ import com.chess.engine.board.Board;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
 import com.chess.engine.pieces.Piece;
+import com.chess.engine.pieces.Queen;
+import com.chess.engine.pieces.Rook;
 import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ public class WhitePlayer extends Player{
         return this.board.blackPlayer();
     }
     @Override
-    protected Collection<Move> calculateKingCastles(Collection<Move> playerLegals, Collection<Move> opponentsLegals) {
+    protected Collection<Move> calculateKingCastles(final Collection<Move> playerLegals, final Collection<Move> opponentsLegals) {
         final List<Move> kingCastles = new ArrayList<>();
         if(this.playerKing.isFirstMove() && !this.isInCheck()){
             if(!this.board.getTile(61).isOccupied() && !this.board.getTile(62).isOccupied()){
@@ -38,7 +40,8 @@ public class WhitePlayer extends Player{
                     if(Player.calculateAttacksOnTile(61, opponentsLegals).isEmpty() &&
                             Player.calculateAttacksOnTile(62, opponentsLegals).isEmpty() &&
                             rookTile.getPiece().getPieceType().isRook()){
-                        kingCastles.add(null);
+                        kingCastles.add(new Move.KingSideCastleMove(this.board, this.playerKing, 62,
+                                (Rook)rookTile.getPiece(), rookTile.getTileCoordinate(), 61));
                     }
                 }
             }
@@ -46,7 +49,8 @@ public class WhitePlayer extends Player{
                     && !this.board.getTile(57).isOccupied()){
                 final Tile rookTile = this.board.getTile(56);
                 if(rookTile.isOccupied() && rookTile.getPiece().isFirstMove()){
-                    kingCastles.add(null);
+                    kingCastles.add(new Move.QueenSideCastleMove(this.board, this.playerKing, 58,
+                            (Rook)rookTile.getPiece(), rookTile.getTileCoordinate(), 59));
                 }
             }
         }
